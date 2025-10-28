@@ -1,5 +1,4 @@
 import pandas as pd
-import json
 
 class DebtProcessor:
     def __init__(self, excel_file: str):
@@ -10,7 +9,6 @@ class DebtProcessor:
     def load_data(self):
         """Загрузка данных из Excel (первый лист)"""
         self.df = pd.read_excel(self.excel_file, sheet_name=0)
-        # Проверка нужных колонок
         required_cols = ['РСО', 'Дебиторская задолженность на конец периода',
                          'Кредиторская задолженность на конец периода', 'Начислено за период']
         for col in required_cols:
@@ -38,12 +36,3 @@ class DebtProcessor:
         if self.aggregated is None:
             raise ValueError("Сначала нужно агрегировать данные")
         self.aggregated.to_json(json_file, orient='records', force_ascii=False, indent=4)
-
-# --- Пример использования ---
-if __name__ == "__main__":
-    processor = DebtProcessor("data.xlsx")  # замените на свой файл
-    processor.load_data()
-    processor.calculate_overdue()
-    processor.aggregate_by_rso()
-    processor.save_to_json("data.json")
-    print("JSON с агрегированными данными успешно создан!")
