@@ -1,0 +1,8 @@
+<div class="form-upload">
+    <h2 class="text-center mb-3">Загрузите Excel для расчета просроченной задолженности</h2>
+    <form method="post" enctype="multipart/form-data" class="text-center">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn-upload mt-2">Загрузить</button>
+    </form>
+</div>

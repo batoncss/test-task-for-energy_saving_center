@@ -1,0 +1,14 @@
+{% extends "report_app/base.html" %}
+
+{% block title %}Загрузка Excel{% endblock %}
+
+{% block content %}
+
+{% include "report_app/components/form_upload.html" %}
+<h3 class="text-center">Содержимое загруженного файла</h3>
+{% include "report_app/components/table.html" with table_rows=file_data_rows table_headers=file_headers table_title="Содержимое загруженного файла" %}
+<h3 class="text-center">Результат расчёта просроченной задолженности</h3>
+{% include "report_app/components/table.html" with table_rows=result_data_rows table_headers=result_headers table_title="Результаты расчета" %}
+
+
+{% endblock %}
